@@ -1,2 +1,3 @@
-class Reservation: 
-    pass 
+class Reservation:
+    def __init__(self): 
+        pass 
