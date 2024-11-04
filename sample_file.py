@@ -11,3 +11,4 @@ print("alex edited file")
 class Kithcen:
     def __init__(self, kitchen):
         self.kitchen = kitchen
+print("Hi")
