@@ -19,7 +19,7 @@ class Deck:
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
     
     def deal(self, num_cards):
-    dealt_cards = [] 
+        dealt_cards = [] 
     for card in range(num_cards):
         if self.cards
             dealt_cards.append(self.cards.pop())
@@ -28,7 +28,7 @@ class Deck:
             
         return dealt_cards 
     
-     def draw(self):
+    def draw(self):
         if self.cards:
             return self.cards.pop()
         else:
