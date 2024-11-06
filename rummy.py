@@ -20,12 +20,11 @@ class Deck:
     
     def deal(self, num_cards):
         dealt_cards = [] 
-    for card in range(num_cards):
-        if self.cards
-            dealt_cards.append(self.cards.pop())
-        else:
-            break 
-            
+        for card in range(num_cards):
+            if self.cards:
+                dealt_cards.append(self.cards.pop())
+            else:
+                break   
         return dealt_cards 
     
     def draw(self):
