@@ -1,14 +1,11 @@
-class Reservation:
-    def __init__(self): 
-        pass 
+'''Plays the card game rummy'''
+
+class Player:
+    '''add players (up to 4) to play the game'''
     
-class customer: 
-    pass 
-
-print("hello")
-print("alex edited file")
-
-class Kithcen:
-    def __init__(self, kitchen):
-        self.kitchen = kitchen
-print("Hi")
+class Dealer:
+    '''going to be the computer'''
+    
+class Opponents(Player):
+    '''inherits the player'''
+    
