@@ -4,6 +4,3 @@ class Reservation:
     
 class customer: 
     pass 
-
-print("hello")
-
