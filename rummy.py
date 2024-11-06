@@ -19,7 +19,6 @@ class Deck:
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
         
         
-
 class Player:
        
 class RummyGame:
