@@ -48,8 +48,8 @@ class Deck:
         return dealt_cards
     
     def draw(self):
-    """Draws a single card from the deck."""
-    return self.cards.pop() if self.cards else None
+        """Draws a single card from the deck."""
+        return self.cards.pop() if self.cards else None
         
 class Player:
     """A class representing a player in the game.
