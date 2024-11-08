@@ -42,14 +42,19 @@ class Deck:
         self.cards.shuffle()
         
     def deal(self, num_cards):
-        """Deal cards from the deck and sorted by rank."""
-        self.cards = sorted(self.cards, key=lambda card: (card.rank, card.suit))
-        dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
-        return dealt_cards
+        dealt_cards = [] 
+        for card in range(num_cards):
+            if self.cards:
+                dealt_cards.append(self.cards.pop())
+            else:
+                break   
+        return dealt_cards 
     
     def draw(self):
-        """Draws a single card from the deck."""
-        return self.cards.pop() if self.cards else None
+        if self.cards:
+            return self.cards.pop()
+        else:
+            return None
         
 class Player:
     """A class representing a player in the game.
@@ -91,3 +96,22 @@ class Player:
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
        
 class RummyGame:
+    def __init__(self, player1_name, player2_name):
+        """Initializes a RummyGame object with two players.
+        Args:
+            player1_name (str): The name of the first player.
+            player2_name (str): The name of the second player. """
+            
+        self.player1 = Player(player1_name)
+        self.player2 = Player(player2_name)
+        self.deck = Deck()
+        self.deck.shuffle()
+        
+    def deal_cards(self):
+        """Deals 7 cards to each player.
+        """
+        for _ in range(7):
+            self.player1.draw(self.deck)
+            self.player2.draw(self.deck)
+            
+    
