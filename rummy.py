@@ -41,20 +41,15 @@ class Deck:
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
         self.cards.shuffle()
         
-    def deal(self, num_cards):
-        dealt_cards = [] 
-        for card in range(num_cards):
-            if self.cards:
-                dealt_cards.append(self.cards.pop())
-            else:
-                break   
-        return dealt_cards 
+     def deal(self, num_cards):
+        """Deal cards from the deck and sorted by rank."""
+        self.cards = sorted(self.cards, key=lambda card: (card.rank, card.suit))
+        dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
+        return dealt_cards
     
     def draw(self):
-        if self.cards:
-            return self.cards.pop()
-        else:
-            return None
+    """Draws a single card from the deck."""
+    return self.cards.pop() if self.cards else None
         
 class Player:
     """A class representing a player in the game.
