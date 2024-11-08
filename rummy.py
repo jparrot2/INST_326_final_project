@@ -77,6 +77,13 @@ class Player:
         self.hand.append(deck.draw())
     
     def discard_card(self, card, discard_pile):
+        """
+        Discards a specified card from the player's hand to the discard pile.
+
+        Args:
+            card (Card): The card to discard.
+            discard_pile (list): The discard pile where the card is placed.
+        """
         if card in self.hand:
             self.hand.remove(card)
             discard_pile.append(card)
