@@ -41,7 +41,7 @@ class Deck:
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
         self.cards.shuffle()
         
-     def deal(self, num_cards):
+    def deal(self, num_cards):
         """Deal cards from the deck and sorted by rank."""
         self.cards = sorted(self.cards, key=lambda card: (card.rank, card.suit))
         dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
