@@ -1,4 +1,9 @@
 '''Plays the card game rummy'''
+import random
+
+ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace']
+suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
+
 
 class Card: 
     '''represents a card with a rank and suit
@@ -31,7 +36,7 @@ class Deck:
         suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
         # this is a list comprehension that involves an instance of the Card class to to couple together suits and ranks.
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
-    
+        self.cards.shuffle()
     def deal(self, num_cards):
         dealt_cards = [] 
         for card in range(num_cards):
@@ -48,5 +53,39 @@ class Deck:
             return None
         
 class Player:
+    """A class representing a player in the game.
+    
+    Attributes:
+        hand (list): The cards the player currently holds.
+    """
+    def __init__(self):
+        """
+        Initializes a new player with an empty hand of cards.
+        
+        Side effects: 
+            Sets the hand attribute equal to an empty list.
+        """
+        self.hand = []
+    
+    def draw_card(self, deck):
+        """
+        Allows the player to draw a card from the deck.
+
+        Args:
+            deck (Deck): The deck to draw from.
+        """
+        self.hand.append(deck.draw())
+    
+    def discard_card(self, card, discard_pile):
+        if card in self.hand:
+            self.hand.remove(card)
+            discard_pile.append(card)
+    def sort_hand(self):
+        """
+        Sorts the player's hand by rank and suit for easier viewing.
+
+        The cards are sorted first by rank and then by suit.
+        """
+        self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
        
 class RummyGame:
