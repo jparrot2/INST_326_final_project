@@ -52,19 +52,13 @@ class Deck:
         self.cards.shuffle()
         
     def deal(self, num_cards):
-        dealt_cards = [] 
-        for card in range(num_cards):
-            if self.cards:
-                dealt_cards.append(self.cards.pop())
-            else:
-                break   
+        dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
+
         return dealt_cards 
     
     def draw(self):
-        if self.cards:
-            return self.cards.pop()
-        else:
-            return None
+        return self.cards.pop() if self.cards else None
+
         
 class Player:
     """A class representing a player in the game.
@@ -126,7 +120,7 @@ class Player:
         suits=[]
         for card in cards:
             return False if card.suit in suits else suits.append(card.suit)
-        return True 
+        return True   
     
     def declare_win(self):
         suit_groups = {}
@@ -144,15 +138,18 @@ class Player:
                 for i in range(1, len(ranks_in_suit)):
                     if ranks_in_suit[i] != ranks_in_suit[i - 1] + 1:
                         return False  
-                
+
         for cards in rank_groups.values():
             if len(cards) >= 3:
                 suits_in_set = {card.suit for card in cards}
                 if len(suits_in_set) != len(cards):
                     return False  
 
-        all_suits = set(suit_groups.keys())
-        print(f"Union of all suits: {all_suits}")
+        all_suits_in_hand = set()  
+        for cards in rank_groups.values():
+            all_suits_in_hand |= {card.suit for card in cards}  # Union using the | operator
+        
+        print(f"Union of all suits in hand: {all_suits_in_hand}")
 
         print(f"{self.name} wins with {len(self.hand)} cards!")
 
