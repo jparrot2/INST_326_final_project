@@ -104,39 +104,8 @@ class Player:
         The cards are sorted first by rank and then by suit.
         """
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
-    def check_valid_hand(self):
-        def is_run(cards):
-            if len(cards) < 3:
-                return False
-            cards.sort(key=lambda x: ranks.index(x.rank))
-            for i in range(len(cards) - 1):
-                if ranks.index(cards[i + 1].rank) != ranks.index(cards[i].rank) + 1:
-                    return False
-            return True
-        def is_set(cards):
-            if len(cards) < 3 or len(cards) > 4:
-                return False
-            first_rank = cards[0].rank
-            return all(card.rank == first_rank for card in cards) and \
-               len(set(card.suit for card in cards)) == len(cards)
-        suit_groups = {}
-        rank_groups = {}
-        for card in self.hand:
-            if card.suit not in suit_groups:
-                suit_groups[card.suit] = []
-            suit_groups[card.suit].append(card)
-            if card.rank not in rank_groups:
-                rank_groups[card.rank] = []
-            rank_groups[card.rank].append(card)
-        for suit, cards in suit_groups.items():
-            if len(cards) >= 3:
-                if not is_run(cards):
-                    return False
-        for rank, cards in rank_groups.items():
-            if len(cards) >= 3:
-                if not is_set(cards):
-                    return False
-        return True
+        
+    def check_valid_hand():
         
     def declare_win(self):
         if self.check_valid_hand():
@@ -156,22 +125,19 @@ class RummyGame:
         self.deck = Deck()
         self.deck.shuffle()
         
+    def take_turns(self, player): 
+        print(f"It's {player.name}'s turn!")
+        drawn_card = self.deck.draw()
+        if drawn_card:
+            pass
+        
+        
     def deal_cards(self):
         """Deals 7 cards to each player 1 and player 2.
         """
         for _ in range(7):
             self.player1.draw(self.deck)
             self.player2.draw(self.deck)
-    
-    def take_turns(self, player): 
-        print(f"It's {player.name}'s turn!")
-        
-        drawn_card = self.deck.draw()
-        if drawn_card: 
-            print(f"{player.name} drew {drawn_card}")
-            player.hand.append(drawn_card)
-        else: 
-            print("So sorry! The deck is empty. There is no card to draw.")
     
     def display_game_state(self, player):
         print(f"Your hand: {[str(card) for card in player.hand]}")
