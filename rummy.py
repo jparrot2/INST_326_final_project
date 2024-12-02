@@ -129,6 +129,7 @@ class Player:
                 return False 
             suits.appened(card.suit)
         return True   
+    
     def declare_win(self):
         suit_groups = {}
         rank_groups = {}
