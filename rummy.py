@@ -113,5 +113,23 @@ class RummyGame:
         for _ in range(7):
             self.player1.draw(self.deck)
             self.player2.draw(self.deck)
-            
     
+    def display_game_state(self, player):
+        print(f"Your hand: {[str(card) for card in player.hand]}")
+        if self.discard_pile:
+            print(f"Top of discard pile: {self.discard_pile[-1]}")
+        else:
+            print("The discard pile is empty.")
+
+    def handle_discard_phase(self, player):
+        while True:
+            print(f"Your hand: {[str(card) for card in player.hand]}")
+            discard_index = input("Choose a card to discard (index): ")
+            if discard_index.isdigit():
+                discard_index = int(discard_index)
+                if 0 <= discard_index < len(player.hand):
+                    discarded_card = player.hand.pop(discard_index)
+                    self.discard_pile.append(discarded_card)
+                    print(f"You discarded: {discarded_card}")
+                    break
+            print("Invalid index. Please try again.")
