@@ -130,30 +130,36 @@ class Player:
             suits.appened(card.suit)
         return True   
     
-    def declare_win(self):
-        suit_groups = {}
-        rank_groups = {}
+   def declare_win(self):
+    suit_groups = {}
+    rank_groups = {}
 
-        for card in self.hand:
-            if card.suit not in suit_groups:
-                suit_groups[card.suit] = []
-            suit_groups[card.suit].append(card)
+    for card in self.hand:
+        suit_groups.setdefault(card.suit, []).append(card)
+        rank_groups.setdefault(card.rank, []).append(card)
 
-            if card.rank not in rank_groups:
-                rank_groups[card.rank] = []
-            rank_groups[card.rank].append(card)
+    for cards in suit_groups.values():
+        if len(cards) >= 3:
+            ranks_in_suit = [ranks.index(card.rank) for card in cards]
+            ranks_in_suit.sort(key=lambda x: x)  # Using a key function to sort by rank
 
-        for suit, cards in suit_groups.items():
-            if len(cards) >= 3:
-                if not is_run(cards):
-                    return False
-                
-        for rank, cards in rank_groups.items():
-            if len(cards) >= 3:
-                if not is_set(cards):
-                    return False
-        return True
-        print(f"{self.name} wins!")
+            for i in range(1, len(ranks_in_suit)):
+                if ranks_in_suit[i] != ranks_in_suit[i - 1] + 1:
+                    return False  # Invalid run (cards are not consecutive)
+
+    for cards in rank_groups.values():
+        if len(cards) >= 3:
+            suits_in_set = {card.suit for card in cards}
+            if len(suits_in_set) != len(cards):
+                return False  # Invalid set (some suits are duplicated)
+
+    all_suits = set(suit_groups.keys())
+    print(f"Union of all suits: {all_suits}")
+
+    print(f"{self.name} wins with {len(self.hand)} cards!")
+
+    return True
+ 
 
 
 
