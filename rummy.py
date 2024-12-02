@@ -50,6 +50,8 @@ class Deck:
         """ 
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
         self.cards.shuffle()
+    
+    def shuffle(): 
         
     def deal(self, num_cards):
         dealt_cards = [] 
@@ -104,6 +106,9 @@ class Player:
         The cards are sorted first by rank and then by suit.
         """
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
+    def check_valid_hand():
+        
+    def declare_win():
        
 class RummyGame:
     def __init__(self, player1_name, player2_name):
