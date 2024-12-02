@@ -104,9 +104,6 @@ class Player:
         The cards are sorted first by rank and then by suit.
         """
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
-        
-    def check_valid_hand():
-        
     def is_run(cards):
         if len(cards) < 3:
             return False
@@ -128,40 +125,38 @@ class Player:
                 return False
         suits=[]
         for card in cards:
-            if card.suit in suits:
-                return False 
-            suits.appened(card.suit)
+            return False if card.suit in suits else suits.append(card.suit)
         return True   
     
     def declare_win(self):
-    suit_groups = {}
-    rank_groups = {}
+        suit_groups = {}
+        rank_groups = {}
 
-    for card in self.hand:
-        suit_groups.setdefault(card.suit, []).append(card)
-        rank_groups.setdefault(card.rank, []).append(card)
+        for card in self.hand:
+            suit_groups.setdefault(card.suit, []).append(card)
+            rank_groups.setdefault(card.rank, []).append(card)
 
-    for cards in suit_groups.values():
-        if len(cards) >= 3:
-            ranks_in_suit = [ranks.index(card.rank) for card in cards]
-            ranks_in_suit.sort(key=lambda x: x)  
+        for cards in suit_groups.values():
+            if len(cards) >= 3:
+                ranks_in_suit = [ranks.index(card.rank) for card in cards]
+                ranks_in_suit.sort(key=lambda x: x)  
 
-            for i in range(1, len(ranks_in_suit)):
-                if ranks_in_suit[i] != ranks_in_suit[i - 1] + 1:
-                    return False  
+                for i in range(1, len(ranks_in_suit)):
+                    if ranks_in_suit[i] != ranks_in_suit[i - 1] + 1:
+                        return False  
                 
-    for cards in rank_groups.values():
-        if len(cards) >= 3:
-            suits_in_set = {card.suit for card in cards}
-            if len(suits_in_set) != len(cards):
-                return False  
+        for cards in rank_groups.values():
+            if len(cards) >= 3:
+                suits_in_set = {card.suit for card in cards}
+                if len(suits_in_set) != len(cards):
+                    return False  
 
-    all_suits = set(suit_groups.keys())
-    print(f"Union of all suits: {all_suits}")
+        all_suits = set(suit_groups.keys())
+        print(f"Union of all suits: {all_suits}")
 
-    print(f"{self.name} wins with {len(self.hand)} cards!")
+        print(f"{self.name} wins with {len(self.hand)} cards!")
 
-    return True
+        return True
 
 
 
