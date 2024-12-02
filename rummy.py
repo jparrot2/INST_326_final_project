@@ -96,8 +96,43 @@ class Player:
         The cards are sorted first by rank and then by suit.
         """
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
-    def check_valid_hand():
-        
+    def check_valid_hand(self):
+        def is_run(cards):
+            if len(cards) < 3:
+                return False
+            cards.sort(key=lambda x:ranks.index(x.rank))
+            for i in range(len(cards) -1):
+                if ranks.index(cards[i +1].rank) != ranks.index(cards[i].rank) +1:
+                    return False
+            return True
+        def is_set(cards):
+            if len(cards) < 3 or len(cards) > 4:
+                return False
+            first_rank = cards[0].rank
+            return all(card.rank == first_rank for card in cards) and \
+                len(set(card.suit for card in cards)) == len(cards)
+        suit_groups = {}
+        rank_groups = {}
+        for card in self.hand:
+            if card.suit not in suit_groups:
+                suit_groups[card.suit] = []
+            suit_groups[card.suit].append(card)
+            if card.rank not in rank_groups:
+                rank_groups[card.rank] = []
+            rank_groups[card.rank].append(card)
+        for suit, cards in suit_groups.items():
+            while len(cards) >= 3:
+                if is_run(cards):
+                    cards = cards[3:]  # Remove the valid run
+                else:
+                    return False
+        for rank, cards in rank_groups.items():
+            while len(cards) >= 3:
+                if is_set(cards):
+                    cards = cards[3:]  # Remove the valid set
+                else:
+                    return False
+        return True
     def declare_win():
        
 class RummyGame:
