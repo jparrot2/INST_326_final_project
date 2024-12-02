@@ -133,7 +133,6 @@ class Player:
         if self.check_valid_hand():
             result = f"{self.name} wins!"
 
-
        
 class RummyGame:
     def __init__(self, player1_name, player2_name):
