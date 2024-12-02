@@ -37,7 +37,17 @@ class Card:
         return False 
     
 class Deck:
-    def __init__(self): 
+    def __init__(self):
+        """Initializes a card deck that combines ranks and suits. Makes a list of Card objects 
+        with ranks and suits. 
+        
+        Attributes: 
+        cards (list): A shuffled and randomized list of Card objects for the deck. 
+        
+        Side Effects: 
+        Shuffles the cards attribute
+        
+        """ 
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
         self.cards.shuffle()
     
@@ -148,7 +158,7 @@ class RummyGame:
         self.deck.shuffle()
         
     def deal_cards(self):
-        """Deals 7 cards to each player.
+        """Deals 7 cards to each player 1 and player 2.
         """
         for _ in range(7):
             self.player1.draw(self.deck)
