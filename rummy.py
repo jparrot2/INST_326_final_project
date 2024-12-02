@@ -104,6 +104,9 @@ class Player:
         The cards are sorted first by rank and then by suit.
         """
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
+        
+    def check_valid_hand():
+        
     def is_run(cards):
         if len(cards) < 3:
             return False
@@ -145,6 +148,16 @@ class RummyGame:
         self.player2 = Player(player2_name)
         self.deck = Deck()
         self.deck.shuffle()
+        
+    def take_turns(self, player): 
+        print(f"It's {player.name}'s turn!")
+        drawn_card = self.deck.draw()
+        if drawn_card:
+            print(f"{player.name} drew {drawn_card}")
+            player.hand.append(drawn_card)
+        else: 
+            print("So sorry! The deck is empty, no cards to draw.")
+        
         
     def deal_cards(self):
         """Deals 7 cards to each player 1 and player 2.
