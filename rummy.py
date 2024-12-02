@@ -128,7 +128,7 @@ class Player:
             if card.suit in suits:
                 return False 
             suits.appened(card.suit)
-        return True
+        return True   
     def declare_win(self):
         if self.check_valid_hand():
             result = f"{self.name} wins!"
