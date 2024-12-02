@@ -128,32 +128,10 @@ class Player:
             if card.suit in suits:
                 return False 
             suits.appened(card.suit)
-        return True   
-    def declare_win(self):
-        suit_groups = {}
-        rank_groups = {}
-
-        for card in self.hand:
-            if card.suit not in suit_groups:
-                suit_groups[card.suit] = []
-            suit_groups[card.suit].append(card)
-
-            if card.rank not in rank_groups:
-                rank_groups[card.rank] = []
-            rank_groups[card.rank].append(card)
-
-        for suit, cards in suit_groups.items():
-            if len(cards) >= 3:
-                if not is_run(cards):
-                    return False
-                
-        for rank, cards in rank_groups.items():
-            if len(cards) >= 3:
-                if not is_set(cards):
-                    return False
         return True
-        print(f"{self.name} wins!")
-
+    def declare_win(self):
+        if self.check_valid_hand():
+            result = f"{self.name} wins!"
 
 
        
