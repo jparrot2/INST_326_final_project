@@ -154,7 +154,10 @@ class RummyGame:
         print(f"It's {player.name}'s turn!")
         drawn_card = self.deck.draw()
         if drawn_card:
-            pass
+            print(f"{player.name} drew {drawn_card}")
+            player.hand.append(drawn_card)
+        else: 
+            print("So sorry! The deck is empty, no cards to draw.")
         
         
     def deal_cards(self):
