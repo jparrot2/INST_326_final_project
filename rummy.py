@@ -121,7 +121,7 @@ class RummyGame:
         else:
             print("The discard pile is empty.")
 
-    def handle_discard_phase(self, player):
+    def handle_discard(self, player):
         while True:
             print(f"Your hand: {[str(card) for card in player.hand]}")
             discard_index = input("Choose a card to discard (index): ")
