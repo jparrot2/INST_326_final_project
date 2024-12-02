@@ -126,7 +126,7 @@ class Player:
         suits=[]
         for card in cards:
             return False if card.suit in suits else suits.append(card.suit)
-        return True   
+        return True 
     
     def declare_win(self):
         suit_groups = {}
