@@ -98,7 +98,11 @@ class Player:
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
     def check_valid_hand():
         
-    def declare_win():
+    def declare_win(self):
+        if self.check_valid_hand():
+            result = f"{self.name} wins!"
+
+
        
 class RummyGame:
     def __init__(self, player1_name, player2_name):
