@@ -51,19 +51,8 @@ class Deck:
         
         """ 
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
-        random.shuffle(self.cards)
+        self.cards.shuffle()
         
-<<<<<<< HEAD
-     def deal(self, num_cards):
-        """Deal cards from the deck and sorted by rank."""
-        self.cards = sorted(self.cards, key=lambda card: (card.rank, card.suit))
-        dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
-        return dealt_cards
-    
-    def draw(self):
-        """Draws a single card from the deck."""
-        return self.cards.pop() if self.cards else None
-=======
     def deal(self, num_cards):
         dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
 
@@ -72,7 +61,6 @@ class Deck:
     def draw(self):
         return self.cards.pop() if self.cards else None
 
->>>>>>> refs/remotes/origin/main
         
 class Player:
     """A class representing a player in the game.
@@ -113,10 +101,6 @@ class Player:
         The cards are sorted first by rank and then by suit.
         """
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
-<<<<<<< HEAD
-       
-class RummyGame:
-=======
     def is_run(cards):
         if len(cards) < 3:
             return False
@@ -247,4 +231,3 @@ if __name__ == "__main__":
     
     print(f"Welcome to Rummy! {args.player1} vs {args.player2}")
     game.deal_cards()
->>>>>>> refs/remotes/origin/main
