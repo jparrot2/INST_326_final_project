@@ -164,8 +164,10 @@ class RummyGame:
         """
         self.player1 = Player(player1_name)
         self.player2 = Player(player2_name)
+        self.players = [self.player1, self.player2]
         self.deck = Deck()
         self.discard_pile = []
+        self.turn = 0
 
     def deal_cards(self):
         """Deals 7 cards to each player 1 and player 2.
@@ -180,6 +182,23 @@ class RummyGame:
             print(f"Top of discard pile: {self.discard_pile[-1]}")
         else:
             print("The discard pile is empty.")
+    
+    def handle_draw(self, player):
+        """Allows the player to draw a card from the deck or discard pile.
+        """
+        print("Do you want to draw from the deck or the discard pile?")
+        print("1. Deck")
+        print("2. Discard pile")
+        while True:
+            choice = input("Enter 1 or 2: ")
+            if choice == "1":
+                player.draw_card(self.deck)
+                break
+            elif choice == "2" and self.discard_pile:
+                player.hand.append(self.discard_pile.pop())
+                break
+            else:
+                print("Invalid choice. Please try again.")
     
     def handle_discard(self, player):
         while True:
@@ -197,10 +216,14 @@ class RummyGame:
     def take_turns(self, player): 
         print(f"It's {player.name}'s turn!")
         self.display_game_state(player)
-        self.handle_draw_phase(player)
-        self.handle_discard_phase(player)
+        self.handle_draw(player)
+        self.handle_discard(player)
         return self.check_win_condition(player)
-            
+    
+    def check_win_condition(self, player):
+        """Checks if the player has won by calling declare_win."""
+        return player.declare_win() 
+          
     def play_game(self):
         self.deal_cards()
         game_over = False
