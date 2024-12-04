@@ -199,12 +199,10 @@ class RummyGame:
                     
     def take_turns(self, player): 
         print(f"It's {player.name}'s turn!")
-        drawn_card = self.deck.draw()
-        if drawn_card:
-            print(f"{player.name} drew {drawn_card}")
-            player.hand.append(drawn_card)
-        else: 
-            print("So sorry! The deck is empty, no cards to draw.")
+        self.display_game_state(player)
+        self.handle_draw_phase(player)
+        self.handle_discard_phase(player)
+        return self.check_win_condition(player)
             
     def play_game(self):
         self.deal_cards()
