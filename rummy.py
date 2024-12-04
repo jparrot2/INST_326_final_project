@@ -105,7 +105,7 @@ class Player:
         for card in cards:
             if card.suit != first_suit:
                 return False
-        cards.sort(key=lambda x: ranks.index(x.rank))  # Sort by rank
+        cards.sort(key=lambda x: ranks.index(x.rank)) 
         for i in range(len(cards) - 1):
             if ranks.index(cards[i + 1].rank) != ranks.index(cards[i].rank) + 1:
                 return False 
