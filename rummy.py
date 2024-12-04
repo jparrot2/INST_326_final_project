@@ -169,7 +169,14 @@ class RummyGame:
         self.player2 = Player(player2_name)
         self.deck = Deck()
         self.deck.shuffle()
-        
+    
+    def deal_cards(self):
+        """Deals 7 cards to each player 1 and player 2.
+        """
+        for _ in range(7):
+            self.player1.draw(self.deck)
+            self.player2.draw(self.deck)
+
     def take_turns(self, player): 
         print(f"It's {player.name}'s turn!")
         drawn_card = self.deck.draw()
@@ -179,14 +186,6 @@ class RummyGame:
         else: 
             print("So sorry! The deck is empty, no cards to draw.")
         
-        
-    def deal_cards(self):
-        """Deals 7 cards to each player 1 and player 2.
-        """
-        for _ in range(7):
-            self.player1.draw(self.deck)
-            self.player2.draw(self.deck)
-    
     def display_game_state(self, player):
         print(f"Your hand: {[str(card) for card in player.hand]}")
         if self.discard_pile:
