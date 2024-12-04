@@ -51,7 +51,7 @@ class Deck:
         
         """ 
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
-        self.cards.shuffle()
+        random.shuffle(self.cards)
         
     def deal(self, num_cards):
         dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
