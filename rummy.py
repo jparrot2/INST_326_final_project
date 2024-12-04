@@ -41,20 +41,15 @@ class Deck:
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
         self.cards.shuffle()
         
-    def deal(self, num_cards):
-        dealt_cards = [] 
-        for card in range(num_cards):
-            if self.cards:
-                dealt_cards.append(self.cards.pop())
-            else:
-                break   
-        return dealt_cards 
+     def deal(self, num_cards):
+        """Deal cards from the deck and sorted by rank."""
+        self.cards = sorted(self.cards, key=lambda card: (card.rank, card.suit))
+        dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
+        return dealt_cards
     
     def draw(self):
-        if self.cards:
-            return self.cards.pop()
-        else:
-            return None
+        """Draws a single card from the deck."""
+        return self.cards.pop() if self.cards else None
         
 class Player:
     """A class representing a player in the game.
@@ -96,40 +91,3 @@ class Player:
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
        
 class RummyGame:
-    def __init__(self, player1_name, player2_name):
-        """Initializes a RummyGame object with two players.
-        Args:
-            player1_name (str): The name of the first player.
-            player2_name (str): The name of the second player. """
-            
-        self.player1 = Player(player1_name)
-        self.player2 = Player(player2_name)
-        self.deck = Deck()
-        self.deck.shuffle()
-        
-    def deal_cards(self):
-        """Deals 7 cards to each player.
-        """
-        for _ in range(7):
-            self.player1.draw(self.deck)
-            self.player2.draw(self.deck)
-    
-    def display_game_state(self, player):
-        print(f"Your hand: {[str(card) for card in player.hand]}")
-        if self.discard_pile:
-            print(f"Top of discard pile: {self.discard_pile[-1]}")
-        else:
-            print("The discard pile is empty.")
-
-    def handle_discard(self, player):
-        while True:
-            print(f"Your hand: {[str(card) for card in player.hand]}")
-            discard_index = input("Choose a card to discard (index): ")
-            if discard_index.isdigit():
-                discard_index = int(discard_index)
-                if 0 <= discard_index < len(player.hand):
-                    discarded_card = player.hand.pop(discard_index)
-                    self.discard_pile.append(discarded_card)
-                    print(f"You discarded: {discarded_card}")
-                    break
-            print("Invalid index. Please try again.")
