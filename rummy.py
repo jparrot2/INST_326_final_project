@@ -68,13 +68,14 @@ class Player:
     Attributes:
         hand (list): The cards the player currently holds.
     """
-    def __init__(self):
+    def __init__(self, name):
         """Initializes a new player with an empty hand of cards.
         
         Side effects: 
             Sets the hand attribute equal to an empty list.
         """
         self.hand = []
+        self.name=name
     
     def draw_card(self, deck):
         """Allows the player to draw a card from the deck.
