@@ -155,9 +155,6 @@ class Player:
 
         return True
 
-
-
-       
 class RummyGame:
     def __init__(self, player1_name, player2_name):
         """Initializes a RummyGame object with two players.
@@ -206,6 +203,3 @@ class RummyGame:
                     print(f"You discarded: {discarded_card}")
                     break
             print("Invalid index. Please try again.")
-
-
-
