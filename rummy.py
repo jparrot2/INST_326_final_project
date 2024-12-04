@@ -51,7 +51,7 @@ class Deck:
         
         """ 
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
-        self.cards.shuffle()
+        random.shuffle(self.cards)
         
     def deal(self, num_cards):
         dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
@@ -176,23 +176,14 @@ class RummyGame:
         for _ in range(7):
             self.player1.draw(self.deck)
             self.player2.draw(self.deck)
-
-    def take_turns(self, player): 
-        print(f"It's {player.name}'s turn!")
-        drawn_card = self.deck.draw()
-        if drawn_card:
-            print(f"{player.name} drew {drawn_card}")
-            player.hand.append(drawn_card)
-        else: 
-            print("So sorry! The deck is empty, no cards to draw.")
-        
+            
     def display_game_state(self, player):
         print(f"Your hand: {[str(card) for card in player.hand]}")
         if self.discard_pile:
             print(f"Top of discard pile: {self.discard_pile[-1]}")
         else:
             print("The discard pile is empty.")
-
+    
     def handle_discard(self, player):
         while True:
             print(f"Your hand: {[str(card) for card in player.hand]}")
@@ -205,7 +196,23 @@ class RummyGame:
                     print(f"You discarded: {discarded_card}")
                     break
             print("Invalid index. Please try again.")
+                    
+    def take_turns(self, player): 
+        print(f"It's {player.name}'s turn!")
+        drawn_card = self.deck.draw()
+        if drawn_card:
+            print(f"{player.name} drew {drawn_card}")
+            player.hand.append(drawn_card)
+        else: 
+            print("So sorry! The deck is empty, no cards to draw.")
             
+    def play_game(self):
+        self.deal_cards()
+        game_over = False
+        while not game_over:
+            current_player = self.players[self.turn]
+            game_over= self.take_turns(current_player)
+            self.turn = (self.turn + 1) % len(self.players)
 
 def parse_args(arglist): 
     """Parses the command line arguments for the game.
