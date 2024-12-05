@@ -105,7 +105,7 @@ class Player:
         """
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
         
-    def is_run(cards):
+    def is_run(self, cards):
         if len(cards) < 3:
             return False
         first_suit = cards[0].suit
@@ -118,17 +118,19 @@ class Player:
                 return False 
         return True
     
-    def is_set(cards):
+    def is_set(self, cards):
         if len(cards) < 3 or len(cards) > 4:
             return False
         first_rank = cards[0].rank
         for card in cards:
             if card.rank != first_rank:
                 return False
-        suits=[]
+        suits = []
         for card in cards:
-            return False if card.suit in suits else suits.append(card.suit)
-        return True   
+            if card.suit in suits:
+                return False
+            suits.append(card.suit)
+        return True
     
     def declare_win(self):
         suit_groups = {}
