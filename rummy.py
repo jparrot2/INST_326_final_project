@@ -166,7 +166,7 @@ class Player:
         suits = set()
         for card in cards:
             if card.suit in suits:
-        return False
+                return False
             suits.add(card.suit)
         return True
     
@@ -194,9 +194,9 @@ class Player:
             if len(cards) >= 3 and self.is_run(cards):
                 return True
             for cards in rank_groups.values():
-                    if len(cards) >= 3 and self.is_set(cards):
-                        return True
-                    return False
+                if len(cards) >= 3 and self.is_set(cards):
+                    return True
+            return False
 
 class RummyGame:
     def __init__(self, player1_name, player2_name):
