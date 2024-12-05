@@ -384,10 +384,10 @@ def parse_args(arglist):
     """Parses the command line arguments for the game.
     
     Args:
-        arglist (list of str): List of command-line arguments to parse.
+    arglist (list of str): List of command-line arguments to parse.
 
     Returns:
-        Namespace: Parsed arguments of the game as attributes.
+     Namespace: Parsed arguments of the game as attributes.
         
     Author: 
     Jayla Parrott 
