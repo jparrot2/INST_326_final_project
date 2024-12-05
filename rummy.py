@@ -148,10 +148,26 @@ class Player:
 
 class RummyGame:
     def __init__(self, player1_name, player2_name):
-        """Initializes a RummyGame object with two players.
+        """
+        Initializes a RummyGame object with two players, a shuffled deck of cards, and a game state.
+        
         Args:
-            player1_name (str): The name of the first player.
-            player2_name (str): The name of the second player. 
+            player1_name (str): The name of the first player for the game.
+            player2_name (str): The name of the second player for the game.
+            
+        Attributes: 
+        player1 (Player): The first player with the name provided at the command line. 
+        player2 (Player): The second player with the name provided at the command line.
+        players (list): A list that contains the names of players 1 and 2. 
+        discard_pile (list): A list that shows the pile of discarded cards in the game. 
+        turn (int): A tracker that keeps track of each player's turn. Initialized at 0. 
+        
+        Author: 
+        Jayla Parrott 
+        
+        Techniques: 
+        Composition. The RummyGame class is using instances of the Player and Deck 
+        class to provide functionality.   
         """
         self.player1 = Player(player1_name)
         self.player2 = Player(player2_name)
