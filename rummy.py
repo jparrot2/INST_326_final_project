@@ -6,7 +6,6 @@ import sys
 ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace', 'Jokers']
 suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
 
-
 class Card: 
     '''Represents a card with a rank and suit
     
@@ -51,7 +50,6 @@ class Deck:
         
         Author: 
         Jayla Parrott 
-        
         """ 
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
         self.shuffle()
@@ -86,13 +84,13 @@ class Deck:
 
         """
         return self.cards.pop() if self.cards else None
-
-        
+      
 class Player:
     """A class representing a player in the game.
     
     Attributes:
         hand (list): The cards the player currently holds.
+        name (str): name of the player.
     """
     def __init__(self, name):
         """Initializes a new player with an empty hand of cards.
@@ -103,7 +101,7 @@ class Player:
         Author: Alex Britton
         """
         self.hand = []
-        self.name=name
+        self.name = name
     
     def draw_card(self, deck):
         """Allows the player to draw a card from the deck.
@@ -255,6 +253,9 @@ class RummyGame:
         """Displays the current state of the game for 
         players to decide their move.
         
+        Args:
+            player (player class instance): the player that needs their gamestate displayed.
+            
         Side effects:
             Prints the players cards in their hand and 
             the card on top of the discard pile.
@@ -286,6 +287,12 @@ class RummyGame:
     
     def handle_discard(self, player):
         """Handles how the player discards their card of choice.
+        
+        Args:
+            player (player class instance): the player that is up and needs to discard.
+        
+        Raises:
+            A ValueError if the input is invalid.
         
         Side effects:
             Prints the players hand to decide what they need to discard. 
@@ -336,6 +343,9 @@ class RummyGame:
     def check_win_condition(self, player):
         """Checks if the player has won by calling declare_win.
         
+        Args:
+            player (player class instance): the player to be checked.
+
         Returns:
             A player declare win object which 
             determines if the player won or not.
