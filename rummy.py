@@ -219,7 +219,11 @@ class RummyGame:
         while not game_over:
             current_player = self.players[self.turn]
             game_over= self.take_turns(current_player)
-            self.turn = (self.turn + 1) % len(self.players)
+            if current_player.declare_win():
+                print(f"\n{current_player.name} wins the game!")
+                game_over = True
+            else:
+                self.turn = (self.turn + 1) % len(self.players)
 
 def parse_args(arglist): 
     """Parses the command line arguments for the game.
