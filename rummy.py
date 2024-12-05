@@ -246,15 +246,17 @@ class RummyGame:
     def handle_discard(self, player):
         while True:
             print(f"Your hand: {[str(card) for card in player.hand]}")
-            discard_index = input("Choose a card to discard (index): ")
-            if discard_index.isdigit():
-                discard_index = int(discard_index)
+            try:
+                discard_index = int(input(f"{player.name}, choose a card to discard (0-{len(player.hand) - 1}): "))
                 if 0 <= discard_index < len(player.hand):
                     discarded_card = player.hand.pop(discard_index)
                     self.discard_pile.append(discarded_card)
                     print(f"You discarded: {discarded_card}")
                     break
-            print("Invalid index. Please try again.")
+                else:
+                    print("Invalid index. Please try again.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
                     
     def take_turns(self, player): 
         """
