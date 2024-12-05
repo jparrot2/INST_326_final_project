@@ -51,17 +51,18 @@ class Deck:
         
         """ 
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
+        self.shuffle
+    
+    def shuffle(self):
         random.shuffle(self.cards)
         
     def deal(self, num_cards):
         dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
-
         return dealt_cards 
     
     def draw(self):
         return self.cards.pop() if self.cards else None
-
-        
+   
 class Player:
     """A class representing a player in the game.
     
