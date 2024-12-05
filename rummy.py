@@ -39,6 +39,9 @@ class Card:
         return False 
     
 class Deck:
+    """
+    Deals with combining suits and ranks, shuffling cards, dealing the cards, and drawing them."
+    """
     def __init__(self):
         """Initializes a card deck that combines ranks and suits. Makes a list of Card objects 
         with ranks and suits. 
@@ -57,6 +60,12 @@ class Deck:
         self.shuffle()
     
     def shuffle(self):
+        """
+        Shuffles the card object using the shuffle method from the random module. 
+        
+        Side Effects: 
+        Alters the arrangement of the card object. 
+        """
         random.shuffle(self.cards)
         
     def deal(self, num_cards):
