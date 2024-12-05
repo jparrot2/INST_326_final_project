@@ -92,6 +92,9 @@ class Deck:
         Args:
             list: a list of cards that were dealt from the deck. 
 
+        Techniques: 
+            List comprehension is used to pop the specified numbere of cards (num_cards) from the deck. This ensures efficient card removal while checking for available cards. 
+
         Author: Samvitti Nag
         """
         dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
@@ -105,6 +108,9 @@ class Deck:
 
         Returns:
             Card or None: The last card in the deck or None if the deck is empty.
+
+        Techniques:
+            Conditonal Expression is used to check whether the deck contains any cards before attempting to pop one. This is a compact way to ensure there are no errors when the deck is empty. If deck is empty, it returns None, else it pops the last card. 
 
         Author: Samvitti Nag
 
@@ -164,6 +170,21 @@ class Player:
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
         
     def is_run(self, cards):
+        """ 
+        Checks if a given list of cards forms a valid run in a particular suit. 
+
+        A "run" is defined as a sequence of cards with consecutive ranks all belonging to the same suit. 
+        This method will first check that all the cards in the list have the same suit and then verify that their ranks form a consecutive sequence. 
+        It must contain 3 cards minimum to be considered a valid run. 
+
+        Args: 
+            cards (list): A list of 'Card' objects, each having a rank and suit attribute. The list list will be evaluated to see if it forms a valid run.
+
+        Returns: 
+            bool: True if cards form a valid run (consecutive ranks in the same suit), False if otherwise. 
+
+        Author: Samvitti Nag
+        """
         if len(cards) < 3:
             return False
         first_suit = cards[0].suit
