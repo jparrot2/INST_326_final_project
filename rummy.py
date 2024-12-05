@@ -33,7 +33,7 @@ class Card:
             (str) string in the format 'rank of suit' 
         
         Techniques: 
-            Magic methods. Creates a string representation of the card
+            Magic method. Creates a string representation of the card
         
         Author: Anna Carpenter
             '''
@@ -154,6 +154,11 @@ class Player:
         Args:
             card (Card): The card to discard.
             discard_pile (list): The discard pile where the card is placed.
+        
+        Side effects: 
+            adds the card removed to the discard pile 
+            
+        Author: Anna Carpenter
         """
         if card in self.hand:
             self.hand.remove(card)
