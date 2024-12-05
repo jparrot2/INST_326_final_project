@@ -237,9 +237,9 @@ def parse_args(arglist):
         Namespace: Parsed arguments of the game as attributes.
     """
     parser = ArgumentParser(description="Play the card game Rummy.")
-    parser.add_argument("--player1", type=str, default="Player 1", help="Name of the first player (default: Player 1)")
-    parser.add_argument("--player2", type=str, default="Player 2", help="Name of the second player (default: Player 2)")
-    parser.add_argument("--shuffle", action="store_true", help="Shuffle the deck before starting the game.")
+    parser.add_argument("-player1", type=str, default="Player 1", help="Name of the first player (default: Player 1)")
+    parser.add_argument("-player2", type=str, default="Player 2", help="Name of the second player (default: Player 2)")
+    parser.add_argument("-shuffle", action="store_true", help="Shuffle the deck before starting the game.")
     return parser.parse_args(arglist)
 
 if __name__ == "__main__":
@@ -250,4 +250,4 @@ if __name__ == "__main__":
         game.deck.shuffle()
     
     print(f"Welcome to Rummy! {args.player1} vs {args.player2}")
-    game.deal_cards()
+    game.play_game()
