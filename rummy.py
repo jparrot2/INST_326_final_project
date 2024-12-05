@@ -8,17 +8,21 @@ suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
 
 class Card: 
     '''Represents a card with a rank and suit
-    
     Attributes: 
         rank (str): rank of the card (2, 3, 4, ... 10, Jack, ... Ace)
-        suit (str): suit of the card (hearts, diamonds, spades, clubs)'''
-    
+        suit (str): suit of the card (hearts, diamonds, spades, clubs)
+        
+    Author: Anna Carpenter
+    '''
     def __init__(self, rank, suit):
         '''Initializes a Card instance with a given rank and suit
         
         Args: 
             rank(str): rank of the card (see attributes in Card class)
-            suit (str): suit of the card (see attributes in Card class)'''
+            suit (str): suit of the card (see attributes in Card class)
+        
+        Author: Anna Carpenter
+            '''
         self.rank = rank
         self.suit = suit
     
@@ -26,13 +30,23 @@ class Card:
         '''String representation of a card
         
         Returns: 
-            (str) string in the format 'rank of suit' '''
+            (str) string in the format 'rank of suit' 
+        
+        Techniques: 
+            Magic methods. Creates a string representation of the card
+        
+        Author: Anna Carpenter
+            '''
         return f"{self.rank} of {self.suit}"
     
     def __eq__(self, other):
         '''Checks if two cards are equal by comparing rank and suit
+        
         Returns: 
-            (bool) True if the cards match exactly, False otherwise '''
+            (bool) True if the cards match exactly, False otherwise
+            
+        Author: Anna Carpenter
+            '''
         if isinstance (other, Card):
             return self.rank == other.rank and self.suit == other.suit
         return False 
@@ -160,6 +174,30 @@ class Player:
         return True
     
     def is_set(self, cards, allow_jokers= False):
+        '''Determines if there is a valid set within the players hand
+        
+        A valid set is
+        - 3 or 4 cards
+        - if jokers are not allowed, all cards must have the same rank
+        - if jokers are allowed, cards must consist of either:
+            - cards having the same rank
+            - some cards having the same rank and others being jokers
+        - no two cards can have the same suit
+        
+        Args:
+            cards (list): list of card objects to check 
+            allow_jokers (bool): flag to indicate whether jokers are allowed 
+            in the set
+            
+        Returns:
+            bool: True if the cards are a valid set, otherwise False
+            
+        Techniques: 
+            optional parameters: The player can choose to use jokers or they
+            can choose to play as normal. 
+        
+        Author: Anna Carpenter    
+        '''
         if len(cards) < 3 or len(cards) > 4:
             return False
         first_rank = cards[0].rank
@@ -279,6 +317,19 @@ class RummyGame:
     
     def handle_draw(self, player):
         """Allows the player to draw a card from the deck or discard pile.
+        
+        The player can select one of two options
+            1. Deck
+            2. Discard pile
+            
+        Args: 
+            player (Player): player object that will draw a card 
+        
+        Side effects:
+            draws a card from whichever deck the player specifies 
+            and adds it to that players hand
+            
+        Author: Anna Carpenter
         """
         print("Do you want to draw from the deck or the discard pile?")
         print("1. Deck")
@@ -364,6 +415,21 @@ class RummyGame:
         return player.declare_win() 
           
     def play_game(self):
+        '''starts and manages gameplay, the players take turns until one of them
+        wins 
+        
+        Steps of the game:
+        1. deals cards to all the players
+        2. each player takes a turn
+        3. after the player's turn, check if they have won the game
+        4. if a player wins, the game ends
+        5. if no player has won, the next player takes their turn
+        
+        Side effect:
+            modifies the state of the game, updating the turn and checking for a winner
+            
+        Author: Anna Carpenter
+        '''
         self.deal_cards()
         game_over = False
         while not game_over:
