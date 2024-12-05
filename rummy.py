@@ -231,6 +231,25 @@ class RummyGame:
             print("Invalid index. Please try again.")
                     
     def take_turns(self, player): 
+        """
+        Carries out a turn for either player 1 or 2, managing their drawing and discarding of cards. 
+        The current game state for the player is shown, then the player is promped to draw a crad from the deck 
+        or discard pile. Then the player is allowed to discard a card. 
+        
+        Args: 
+        player (Player): The player whose turn it is. 
+        
+        Returns: 
+        bool: True condition if the player meets the criteria for a win and False if they do not.
+        
+        Side Effects: 
+        Modifies the player's hand by adding a card from the deck or discard pile 
+        Removes a card from the player's hand and adds it to the discard pile. 
+        Updates the game state
+        
+        Author: 
+        Jayla Parrott 
+        """
         print(f"It's {player.name}'s turn!")
         self.display_game_state(player)
         self.handle_draw(player)
