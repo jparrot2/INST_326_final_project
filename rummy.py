@@ -3,7 +3,7 @@ import random
 from argparse import ArgumentParser
 import sys 
 
-ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace']
+ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace', 'Jokers']
 suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
 
 
@@ -158,10 +158,9 @@ class Player:
                     jokers.append(card)
                 else:
                     non_jokers.append(card)
-            for card in non_jokers:
-                if card.rank != first_rank:
-                    return False
-            if len(jokers) + len(non_jokers) != len(cards):
+            if len(non_jokers)> 0 and non_jokers[0].rank != first_rank:
+                return False
+            if len(jokers) + len(non_jokers) != len(cards): 
                 return False
         suits = set()
         for card in cards:
