@@ -137,19 +137,12 @@ def declare_win(self):
             suit_groups.setdefault(card.suit, []).append(card)
             rank_groups.setdefault(card.rank, []).append(card)
         for cards in suit_groups.values():
-            if len(cards) >= 3:
-                sorted_cards = sorted(cards, key=lambda c: ranks.index(c.rank))
-                is_run = True
-                for i in range(len(sorted_cards) - 1):
-                    if ranks.index(sorted_cards[i + 1].rank) != ranks.index(sorted_cards[i].rank) + 1:
-                        is_run = False
-                        break
-                if is_run:
-                    return True
-        for cards in rank_groups.values():
-            if len(cards) >= 3:
+            if len(cards) >= 3 and self.is_run(cards):
                 return True
-        return False
+            for cards in rank_groups.values():
+                    if len(cards) >= 3 and self.is_set(cards):
+                        return True
+                    return False
 
 class RummyGame:
     def __init__(self, player1_name, player2_name):
