@@ -130,33 +130,26 @@ class Player:
             return False if card.suit in suits else suits.append(card.suit)
         return True   
     
-    def declare_win(self):
+def declare_win(self):
         suit_groups = {}
         rank_groups = {}
-
         for card in self.hand:
             suit_groups.setdefault(card.suit, []).append(card)
             rank_groups.setdefault(card.rank, []).append(card)
         for cards in suit_groups.values():
             if len(cards) >= 3:
-                ranks_in_suit = [ranks.index(card.rank) for card in cards]
-                ranks_in_suit.sort(key=lambda x: x)  
-
-                for i in range(1, len(ranks_in_suit)):
-                    if ranks_in_suit[i] != ranks_in_suit[i - 1] + 1:
-                        return False  
+                sorted_cards = sorted(cards, key=lambda c: ranks.index(c.rank))
+                is_run = True
+                for i in range(len(sorted_cards) - 1):
+                    if ranks.index(sorted_cards[i + 1].rank) != ranks.index(sorted_cards[i].rank) + 1:
+                        is_run = False
+                        break
+                if is_run:
+                    return True
         for cards in rank_groups.values():
             if len(cards) >= 3:
-                suits_in_set = {card.suit for card in cards}
-                if len(suits_in_set) != len(cards):
-                    return False  
-
-        all_suits_in_hand = set()  
-        for cards in rank_groups.values():
-            all_suits_in_hand |= {card.suit for card in cards}
-        print(f"Union of all suits in hand: {all_suits_in_hand}")
-        print(f"{self.name} wins with {len(self.hand)} cards!")
-        return True
+                return True
+        return False
 
 class RummyGame:
     def __init__(self, player1_name, player2_name):
