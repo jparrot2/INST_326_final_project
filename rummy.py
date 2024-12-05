@@ -136,6 +136,18 @@ class Player:
         return True
     
     def declare_win(self):
+        """
+        Determines whether the current player has won the game based on their hand of cards.
+
+        A player wins if they have either:
+        - a run of at lest three cards of the same suit 
+        - a set of at least three cards of the same rank
+
+        The method checks the player's hand, categorizing the cards by suit and rank, then verifies if any suit group forms a valid run or any rank group forms a valid set.
+
+        Returns: 
+            bool: True if the player has a valid winning hand, False otherwise. 
+        """
         suit_groups = {}
         rank_groups = {}
         for card in self.hand:
