@@ -121,18 +121,32 @@ class Player:
                 return False 
         return True
     
-    def is_set(self, cards):
+    def is_set(self, cards, allow_jokers= False):
         if len(cards) < 3 or len(cards) > 4:
             return False
         first_rank = cards[0].rank
-        for card in cards:
-            if card.rank != first_rank:
+        if not allow_jokers:
+            for card in cards:
+                if card.rank != first_rank:
+                    return False
+        else: 
+            jokers = []
+            non_jokers= []
+            for card in cards:
+                if card.rank == "Joker":
+                    jokers.append(card)
+                else:
+                    non_jokers.append(card)
+            for card in non_jokers:
+                if card.rank != first_rank:
+                    return False
+            if len(jokers) + len(non_jokers) != len(cards):
                 return False
-        suits = []
+        suits = set()
         for card in cards:
             if card.suit in suits:
                 return False
-            suits.append(card.suit)
+            suits.add(card.suit)
         return True
     
     def declare_win(self):
