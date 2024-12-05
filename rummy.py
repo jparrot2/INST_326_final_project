@@ -166,7 +166,7 @@ class Player:
         suits = set()
         for card in cards:
             if card.suit in suits:
-                return False
+        return False
             suits.add(card.suit)
         return True
     
