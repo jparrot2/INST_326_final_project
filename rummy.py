@@ -77,6 +77,9 @@ class Deck:
         
         Side Effects: 
         Alters the arrangement of the card object. 
+        
+        Author: 
+        Jayla Parrott 
         """
         random.shuffle(self.cards)
         
@@ -253,13 +256,16 @@ class Player:
         return False
 
 class RummyGame:
+    """
+    Handles and carries out the functionality of the game. 
+    """
     def __init__(self, player1_name, player2_name):
         """
         Initializes a RummyGame object with two players, a shuffled deck of cards, and a game state.
         
         Args:
-            player1_name (str): The name of the first player for the game.
-            player2_name (str): The name of the second player for the game.
+        player1_name (str): The name of the first player for the game.
+        player2_name (str): The name of the second player for the game.
             
         Attributes: 
         player1 (Player): The first player with the name provided at the command line. 
@@ -444,10 +450,16 @@ def parse_args(arglist):
     """Parses the command line arguments for the game.
     
     Args:
-        arglist (list of str): List of command-line arguments to parse.
+    arglist (list of str): List of command-line arguments to parse.
 
     Returns:
-        Namespace: Parsed arguments of the game as attributes.
+     Namespace: Parsed arguments of the game as attributes.
+        
+    Author: 
+    Jayla Parrott 
+    
+    Techniques: 
+    Using the ArgumentParser class from the argparse module. 
     """
     parser = ArgumentParser(description="Play the card game Rummy.")
     parser.add_argument("-player1", type=str, default="Player 1", help="Name of the first player (default: Player 1)")
