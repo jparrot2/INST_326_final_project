@@ -177,7 +177,14 @@ class RummyGame:
         self.turn = 0
 
     def deal_cards(self):
-        """Deals 7 cards to each player 1 and player 2.
+        """
+        Ensures that both players draw 7 cards from the deck, one card a time. 
+        
+        Side Effects: 
+        Calls the draw_card method on players 1 and 2 and also reduces the number of cards in the deck.
+        
+        Author: 
+        Jayla Parrott 
         """
         for _ in range(7):
             self.player1.draw_card(self.deck)
