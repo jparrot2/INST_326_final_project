@@ -191,16 +191,17 @@ class Player:
         Author: Samvitti Nag
         """
         if len(cards) < 3:
-            return False
-        first_suit = cards[0].suit
+            return False 
+        first_suit = cards[0].suit 
         for card in cards:
             if card.suit != first_suit:
-                return False
-        cards.sort(key=lambda x: ranks.index(x.rank)) 
-        for i in range(len(cards) - 1):
+                return False 
+        cards.sort(key=lambda x: ranks.index(x.rank))
+        for i in range (len(cards) - 1):
             if ranks.index(cards[i + 1].rank) != ranks.index(cards[i].rank) + 1:
                 return False 
         return True
+
     
     def is_set(self, cards, allow_jokers= False):
         '''Determines if there is a valid set within the players hand
