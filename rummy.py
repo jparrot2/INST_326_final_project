@@ -316,8 +316,7 @@ class RummyGame:
         game_over = False
         while not game_over:
             current_player = self.players[self.turn]
-            self.take_turns(current_player) 
-            if current_player.declare_win():
+            if self.take_turns(current_player):
                 print(f"\n{current_player.name} wins the game!")
                 game_over = True
             else:
