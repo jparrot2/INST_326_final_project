@@ -99,6 +99,8 @@ class Player:
         
         Side effects: 
             Sets the hand attribute equal to an empty list.
+        
+        Author: Alex Britton
         """
         self.hand = []
         self.name=name
@@ -108,6 +110,11 @@ class Player:
 
         Args:
             deck (Deck): The deck to draw from.
+        
+        Side effects:
+            Appends a card to the hand list from the deck.
+        
+        Author: Alex Britton
         """
         self.hand.append(deck.draw())
     
@@ -124,8 +131,11 @@ class Player:
             
     def sort_hand(self):
         """Sorts the player's hand by rank and suit for easier viewing.
-
-        The cards are sorted first by rank and then by suit.
+        
+        Side effects:
+            Sorts players hand by the rank and suit.
+        
+        Author: Alex Britton
         """
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
         
@@ -242,6 +252,15 @@ class RummyGame:
             self.player2.draw_card(self.deck)
             
     def display_game_state(self, player):
+        """Displays the current state of the game for 
+        players to decide their move.
+        
+        Side effects:
+            Prints the players cards in their hand and 
+            the card on top of the discard pile.
+        
+        Author: Alex Britton
+        """
         print(f"Your hand: {[str(card) for card in player.hand]}")
         if self.discard_pile:
             print(f"Top of discard pile: {self.discard_pile[-1]}")
@@ -266,6 +285,14 @@ class RummyGame:
                 print("Invalid choice. Please try again.")
     
     def handle_discard(self, player):
+        """Handles how the player discards their card of choice.
+        
+        Side effects:
+            Prints the players hand to decide what they need to discard. 
+            Also prints the card the player discarded.
+        
+        Author: Alex Britton
+        """
         while True:
             print(f"Your hand: {[str(card) for card in player.hand]}")
             try:
@@ -307,7 +334,14 @@ class RummyGame:
         return self.check_win_condition(player)
     
     def check_win_condition(self, player):
-        """Checks if the player has won by calling declare_win."""
+        """Checks if the player has won by calling declare_win.
+        
+        Returns:
+            A player declare win object which 
+            determines if the player won or not.
+        
+        Author: Alex Britton
+        """
         return player.declare_win() 
           
     def play_game(self):
