@@ -60,10 +60,31 @@ class Deck:
         random.shuffle(self.cards)
         
     def deal(self, num_cards):
+        """
+        Deals a specified number of cards from the deck. 
+
+        This method removes the top cards from the deck and returns them in list form. If there are fewer than 'num_cards' remaining in the deck, it will just deal as many cards as available. 
+
+        Args:
+            list: a list of cards that were dealt from the deck. 
+
+        Author: Samvitti Nag
+        """
         dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
         return dealt_cards 
     
     def draw(self):
+        """
+        Draws a single card from the deck.
+
+        This method removes and returns the last card from the deck. If the deck is empty, it returns none. 
+
+        Returns:
+            Card or None: The last card in the deck or None if the deck is empty.
+
+        Author: Samvitti Nag
+
+        """
         return self.cards.pop() if self.cards else None
 
         
@@ -161,6 +182,8 @@ class Player:
 
         Returns: 
             bool: True if the player has a valid winning hand, False otherwise. 
+        
+        Author: Samvitti Nag
         """
         suit_groups = {}
         rank_groups = {}
