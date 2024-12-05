@@ -192,10 +192,10 @@ class Player:
         for cards in suit_groups.values():
             if len(cards) >= 3 and self.is_run(cards):
                 return True
-            for cards in rank_groups.values():
-                if len(cards) >= 3 and self.is_set(cards):
-                    return True
-            return False
+        for cards in rank_groups.values():
+            if len(cards) >= 3 and self.is_set(cards):
+                return True
+        return False
 
 class RummyGame:
     def __init__(self, player1_name, player2_name):
