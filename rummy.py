@@ -15,7 +15,8 @@ class Card:
     Author: Anna Carpenter
     '''
     def __init__(self, rank, suit):
-        '''Initializes a Card instance with a given rank and suit
+        '''
+        Initializes a Card instance with a given rank and suit
         
         Args: 
             rank(str): rank of the card (see attributes in Card class)
@@ -27,20 +28,22 @@ class Card:
         self.suit = suit
     
     def __str__(self):
-        '''String representation of a card
+        '''
+        String representation of a card
         
         Returns: 
             (str) string in the format 'rank of suit' 
         
         Techniques: 
-            Magic method. Creates a string representation of the card
+            Magic method. Creates a string representation of the card.
         
         Author: Anna Carpenter
             '''
         return f"{self.rank} of {self.suit}"
     
     def __eq__(self, other):
-        '''Checks if two cards are equal by comparing rank and suit
+        '''
+        Checks if two cards are equal by comparing rank and suit
         
         Returns: 
             (bool) True if the cards match exactly, False otherwise
@@ -56,7 +59,8 @@ class Deck:
     Deals with combining suits and ranks, shuffling cards, dealing the cards, and drawing them."
     """
     def __init__(self):
-        """Initializes a card deck that combines ranks and suits. Makes a list of Card objects 
+        """
+        Initializes a card deck that combines ranks and suits. Makes a list of Card objects 
         with ranks and suits. 
         
         Attributes: 
@@ -92,9 +96,6 @@ class Deck:
         Args:
             list: a list of cards that were dealt from the deck. 
 
-        Techniques: 
-            List comprehension is used to pop the specified numbere of cards (num_cards) from the deck. This ensures efficient card removal while checking for available cards. 
-
         Author: Samvitti Nag
         """
         dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
@@ -109,23 +110,21 @@ class Deck:
         Returns:
             Card or None: The last card in the deck or None if the deck is empty.
 
-        Techniques:
-            Conditonal Expression is used to check whether the deck contains any cards before attempting to pop one. This is a compact way to ensure there are no errors when the deck is empty. If deck is empty, it returns None, else it pops the last card. 
-
         Author: Samvitti Nag
-
         """
         return self.cards.pop() if self.cards else None
       
 class Player:
-    """A class representing a player in the game.
+    """
+    A class representing a player in the game.
     
     Attributes:
         hand (list): The cards the player currently holds.
         name (str): name of the player.
     """
     def __init__(self, name):
-        """Initializes a new player with an empty hand of cards.
+        """
+        Initializes a new player with an empty hand of cards.
         
         Side effects: 
             Sets the hand attribute equal to an empty list.
@@ -136,7 +135,8 @@ class Player:
         self.name = name
     
     def draw_card(self, deck):
-        """Allows the player to draw a card from the deck.
+        """
+        Allows the player to draw a card from the deck.
 
         Args:
             deck (Deck): The deck to draw from.
@@ -149,7 +149,8 @@ class Player:
         self.hand.append(deck.draw())
     
     def discard_card(self, card, discard_pile):
-        """Discards a specified card from the player's hand to the discard pile.
+        """
+        Discards a specified card from the player's hand to the discard pile.
 
         Args:
             card (Card): The card to discard.
@@ -165,7 +166,8 @@ class Player:
             discard_pile.append(card)
             
     def sort_hand(self):
-        """Sorts the player's hand by rank and suit for easier viewing.
+        """
+        Sorts the player's hand by rank and suit for easier viewing.
         
         Side effects:
             Sorts players hand by the rank and suit.
@@ -175,36 +177,21 @@ class Player:
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
         
     def is_run(self, cards):
-        """ 
-        Checks if a given list of cards forms a valid run in a particular suit. 
-
-        A "run" is defined as a sequence of cards with consecutive ranks all belonging to the same suit. 
-        This method will first check that all the cards in the list have the same suit and then verify that their ranks form a consecutive sequence. 
-        It must contain 3 cards minimum to be considered a valid run. 
-
-        Args: 
-            cards (list): A list of 'Card' objects, each having a rank and suit attribute. The list list will be evaluated to see if it forms a valid run.
-
-        Returns: 
-            bool: True if cards form a valid run (consecutive ranks in the same suit), False if otherwise. 
-
-        Author: Samvitti Nag
-        """
         if len(cards) < 3:
-            return False 
-        first_suit = cards[0].suit 
+            return False
+        first_suit = cards[0].suit
         for card in cards:
             if card.suit != first_suit:
-                return False 
-        cards.sort(key=lambda x: ranks.index(x.rank))
-        for i in range (len(cards) - 1):
+                return False
+        cards.sort(key=lambda x: ranks.index(x.rank)) 
+        for i in range(len(cards) - 1):
             if ranks.index(cards[i + 1].rank) != ranks.index(cards[i].rank) + 1:
                 return False 
         return True
-
     
     def is_set(self, cards, allow_jokers= False):
-        '''Determines if there is a valid set within the players hand
+        '''
+        Determines if there is a valid set within the players hand
         
         A valid set is
         - 3 or 4 cards
@@ -330,8 +317,8 @@ class RummyGame:
             self.player2.draw_card(self.deck)
             
     def display_game_state(self, player):
-        """Displays the current state of the game for 
-        players to decide their move.
+        """
+        Displays the current state of the game for players to decide their move.
         
         Args:
             player (player class instance): the player that needs their gamestate displayed.
@@ -349,7 +336,8 @@ class RummyGame:
             print("The discard pile is empty.")
     
     def handle_draw(self, player):
-        """Allows the player to draw a card from the deck or discard pile.
+        """
+        Allows the player to draw a card from the deck or discard pile.
         
         The player can select one of two options
             1. Deck
@@ -379,7 +367,8 @@ class RummyGame:
                 print("Invalid choice. Please try again.")
     
     def handle_discard(self, player):
-        """Handles how the player discards their card of choice.
+        """
+        Handles how the player discards their card of choice.
         
         Args:
             player (player class instance): the player that is up and needs to discard.
@@ -434,7 +423,8 @@ class RummyGame:
         return self.check_win_condition(player)
     
     def check_win_condition(self, player):
-        """Checks if the player has won by calling declare_win.
+        """
+        Checks if the player has won by calling declare_win.
         
         Args:
             player (player class instance): the player to be checked.
@@ -448,8 +438,8 @@ class RummyGame:
         return player.declare_win() 
           
     def play_game(self):
-        '''starts and manages gameplay, the players take turns until one of them
-        wins 
+        '''
+        starts and manages gameplay, the players take turns until one of them wins 
         
         Steps of the game:
         1. deals cards to all the players
@@ -474,7 +464,8 @@ class RummyGame:
                 self.turn = (self.turn + 1) % len(self.players)
 
 def parse_args(arglist): 
-    """Parses the command line arguments for the game.
+    """
+    Parses the command line arguments for the game.
     
     Args:
     arglist (list of str): List of command-line arguments to parse.
