@@ -193,6 +193,8 @@ class Player:
         Returns: 
             bool: True if the cards form a valid run and False otherwise
 
+        Author: Samvitti Nag
+
         """
         if len(cards) < 3:
             return False
