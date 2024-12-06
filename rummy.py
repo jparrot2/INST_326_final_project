@@ -23,6 +23,9 @@ class Card:
             rank(str): rank of the card (see attributes in Card class)
             suit (str): suit of the card (see attributes in Card class)
         
+        Side effects:
+            creates an object that can be modified within the program 
+        
         Author: Anna Carpenter
             '''
         self.rank = rank
@@ -349,7 +352,8 @@ class RummyGame:
         
         Side effects:
             draws a card from whichever deck the player specifies 
-            and adds it to that players hand
+            and adds it to that players hand. prints an invalid choice statement
+            if the player chooses an invalid choice
             
         Author: Anna Carpenter
         """
@@ -450,7 +454,8 @@ class RummyGame:
         5. if no player has won, the next player takes their turn
         
         Side effect:
-            modifies the state of the game, updating the turn and checking for a winner
+            modifies the state of the game, updating the turn and checking for a winner, prints the winner
+            of the game
             
         Author: Anna Carpenter
         '''
