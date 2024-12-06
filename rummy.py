@@ -181,6 +181,19 @@ class Player:
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
         
     def is_run(self, cards):
+        """
+        Checks if a given list of cards forms a valid run in a particular suit.
+
+        A "run" is defined as a sequence of cards with consecutive ranks all belonging to the same suit. 
+        This method will check that the list qualifies as a run if it contains at least three cards, has all cards in the same suit, and has ranks that are consecutive in order.
+
+        Args: 
+            card (list): A list of 'Card' objects where each card has a rank and suit attribute. 
+
+        Returns: 
+            bool: True if the cards form a valid run and False otherwise
+
+        """
         if len(cards) < 3:
             return False
         first_suit = cards[0].suit
