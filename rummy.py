@@ -7,7 +7,8 @@ ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 
 suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
 
 class Card: 
-    '''Represents a card with a rank and suit
+    '''
+    Represents a card with a rank and suit
     Attributes: 
         rank (str): rank of the card (2, 3, 4, ... 10, Jack, ... Ace)
         suit (str): suit of the card (hearts, diamonds, spades, clubs)
