@@ -101,6 +101,9 @@ class Deck:
         Args:
             list: a list of cards that were dealt from the deck. 
 
+        Techniques: 
+            Uses a list comprehension in order to iterate over 'num_cards' but pops from the deck only if there are cards left.
+
         Author: Samvitti Nag
         """
         dealt_cards = [self.cards.pop() for _ in range(num_cards) if self.cards]
@@ -115,7 +118,12 @@ class Deck:
         Returns:
             Card or None: The last card in the deck or None if the deck is empty.
 
+        Techniques: 
+            The method uses a conditional expression to check if there are cards in the deck, and if so, it calls the `pop()` method to remove and return the last card. If the deck is empty, it returns `None` to avoid errors. The single-line ternary expression ensures the code is concise and readable while handling both cases efficiently.
+
         Author: Samvitti Nag
+
+
         """
         return self.cards.pop() if self.cards else None
       
