@@ -49,7 +49,7 @@ class Deck:
         cards (list): A shuffled and randomized list of Card objects for the deck. 
         
         Side Effects: 
-        Shuffles the cards attribute'
+        Shuffles the cards attribute
         
         Author: 
         Jayla Parrott 
