@@ -7,32 +7,53 @@ ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 
 suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
 
 class Card: 
-    '''Represents a card with a rank and suit
-    
+    '''
+    Represents a card with a rank and suit
     Attributes: 
         rank (str): rank of the card (2, 3, 4, ... 10, Jack, ... Ace)
-        suit (str): suit of the card (hearts, diamonds, spades, clubs)'''
-    
+        suit (str): suit of the card (hearts, diamonds, spades, clubs)
+        
+    Author: Anna Carpenter
+    '''
     def __init__(self, rank, suit):
-        '''Initializes a Card instance with a given rank and suit
+        '''
+        Initializes a Card instance with a given rank and suit
         
         Args: 
             rank(str): rank of the card (see attributes in Card class)
-            suit (str): suit of the card (see attributes in Card class)'''
+            suit (str): suit of the card (see attributes in Card class)
+        
+        Side effects:
+            creates an object that can be modified within the program 
+        
+        Author: Anna Carpenter
+            '''
         self.rank = rank
         self.suit = suit
     
     def __str__(self):
-        '''String representation of a card
+        '''
+        String representation of a card
         
         Returns: 
-            (str) string in the format 'rank of suit' '''
+            (str) string in the format 'rank of suit' 
+        
+        Techniques: 
+            Magic method. Creates a string representation of the card.
+        
+        Author: Anna Carpenter
+            '''
         return f"{self.rank} of {self.suit}"
     
     def __eq__(self, other):
-        '''Checks if two cards are equal by comparing rank and suit
+        '''
+        Checks if two cards are equal by comparing rank and suit
+        
         Returns: 
-            (bool) True if the cards match exactly, False otherwise '''
+            (bool) True if the cards match exactly, False otherwise
+            
+        Author: Anna Carpenter
+            '''
         if isinstance (other, Card):
             return self.rank == other.rank and self.suit == other.suit
         return False 
@@ -42,7 +63,8 @@ class Deck:
     Deals with combining suits and ranks, shuffling cards, dealing the cards, and drawing them."
     """
     def __init__(self):
-        """Initializes a card deck that combines ranks and suits. Makes a list of Card objects 
+        """
+        Initializes a card deck that combines ranks and suits. Makes a list of Card objects 
         with ranks and suits. 
         
         Attributes: 
@@ -93,19 +115,20 @@ class Deck:
             Card or None: The last card in the deck or None if the deck is empty.
 
         Author: Samvitti Nag
-
         """
         return self.cards.pop() if self.cards else None
       
 class Player:
-    """A class representing a player in the game.
+    """
+    A class representing a player in the game.
     
     Attributes:
         hand (list): The cards the player currently holds.
         name (str): name of the player.
     """
     def __init__(self, name):
-        """Initializes a new player with an empty hand of cards.
+        """
+        Initializes a new player with an empty hand of cards.
         
         Side effects: 
             Sets the hand attribute equal to an empty list.
@@ -116,7 +139,8 @@ class Player:
         self.name = name
     
     def draw_card(self, deck):
-        """Allows the player to draw a card from the deck.
+        """
+        Allows the player to draw a card from the deck.
 
         Args:
             deck (Deck): The deck to draw from.
@@ -129,18 +153,25 @@ class Player:
         self.hand.append(deck.draw())
     
     def discard_card(self, card, discard_pile):
-        """Discards a specified card from the player's hand to the discard pile.
+        """
+        Discards a specified card from the player's hand to the discard pile.
 
         Args:
             card (Card): The card to discard.
             discard_pile (list): The discard pile where the card is placed.
+        
+        Side effects: 
+            adds the card removed to the discard pile 
+            
+        Author: Anna Carpenter
         """
         if card in self.hand:
             self.hand.remove(card)
             discard_pile.append(card)
             
     def sort_hand(self):
-        """Sorts the player's hand by rank and suit for easier viewing.
+        """
+        Sorts the player's hand by rank and suit for easier viewing.
         
         Side effects:
             Sorts players hand by the rank and suit.
@@ -150,6 +181,21 @@ class Player:
         self.hand.sort(key=lambda x: (ranks.index(x.rank), suits.index(x.suit)))
         
     def is_run(self, cards):
+        """
+        Checks if a given list of cards forms a valid run in a particular suit.
+
+        A "run" is defined as a sequence of cards with consecutive ranks all belonging to the same suit. 
+        This method will check that the list qualifies as a run if it contains at least three cards, has all cards in the same suit, and has ranks that are consecutive in order.
+
+        Args: 
+            card (list): A list of 'Card' objects where each card has a rank and suit attribute. 
+
+        Returns: 
+            bool: True if the cards form a valid run and False otherwise
+
+        Author: Samvitti Nag
+
+        """
         if len(cards) < 3:
             return False
         first_suit = cards[0].suit
@@ -163,6 +209,31 @@ class Player:
         return True
     
     def is_set(self, cards, allow_jokers= False):
+        '''
+        Determines if there is a valid set within the players hand
+        
+        A valid set is
+        - 3 or 4 cards
+        - if jokers are not allowed, all cards must have the same rank
+        - if jokers are allowed, cards must consist of either:
+            - cards having the same rank
+            - some cards having the same rank and others being jokers
+        - no two cards can have the same suit
+        
+        Args:
+            cards (list): list of card objects to check 
+            allow_jokers (bool): flag to indicate whether jokers are allowed 
+            in the set
+            
+        Returns:
+            bool: True if the cards are a valid set, otherwise False
+            
+        Techniques: 
+            optional parameters: The player can choose to use jokers or they
+            can choose to play as normal. 
+        
+        Author: Anna Carpenter    
+        '''
         if len(cards) < 3 or len(cards) > 4:
             return False
         first_rank = cards[0].rank
@@ -265,8 +336,8 @@ class RummyGame:
             self.player2.draw_card(self.deck)
             
     def display_game_state(self, player):
-        """Displays the current state of the game for 
-        players to decide their move.
+        """
+        Displays the current state of the game for players to decide their move.
         
         Args:
             player (player class instance): the player that needs their gamestate displayed.
@@ -284,7 +355,22 @@ class RummyGame:
             print("The discard pile is empty.")
     
     def handle_draw(self, player):
-        """Allows the player to draw a card from the deck or discard pile.
+        """
+        Allows the player to draw a card from the deck or discard pile.
+        
+        The player can select one of two options
+            1. Deck
+            2. Discard pile
+            
+        Args: 
+            player (Player): player object that will draw a card 
+        
+        Side effects:
+            draws a card from whichever deck the player specifies 
+            and adds it to that players hand. prints an invalid choice statement
+            if the player chooses an invalid choice
+            
+        Author: Anna Carpenter
         """
         print("Do you want to draw from the deck or the discard pile?")
         print("1. Deck")
@@ -301,7 +387,8 @@ class RummyGame:
                 print("Invalid choice. Please try again.")
     
     def handle_discard(self, player):
-        """Handles how the player discards their card of choice.
+        """
+        Handles how the player discards their card of choice.
         
         Args:
             player (player class instance): the player that is up and needs to discard.
@@ -356,7 +443,8 @@ class RummyGame:
         return self.check_win_condition(player)
     
     def check_win_condition(self, player):
-        """Checks if the player has won by calling declare_win.
+        """
+        Checks if the player has won by calling declare_win.
         
         Args:
             player (player class instance): the player to be checked.
@@ -370,6 +458,22 @@ class RummyGame:
         return player.declare_win() 
           
     def play_game(self):
+        '''
+        starts and manages gameplay, the players take turns until one of them wins 
+        
+        Steps of the game:
+        1. deals cards to all the players
+        2. each player takes a turn
+        3. after the player's turn, check if they have won the game
+        4. if a player wins, the game ends
+        5. if no player has won, the next player takes their turn
+        
+        Side effect:
+            modifies the state of the game, updating the turn and checking for a winner, prints the winner
+            of the game
+            
+        Author: Anna Carpenter
+        '''
         self.deal_cards()
         game_over = False
         while not game_over:
@@ -381,7 +485,8 @@ class RummyGame:
                 self.turn = (self.turn + 1) % len(self.players)
 
 def parse_args(arglist): 
-    """Parses the command line arguments for the game.
+    """
+    Parses the command line arguments for the game.
     
     Args:
     arglist (list of str): List of command-line arguments to parse.
