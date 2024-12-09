@@ -234,12 +234,8 @@ class Player:
                 
                 if consecutive: 
                     return True
-
         return False
 
-
-
-    
     def is_set(self, cards, allow_jokers= False):
         '''
         Determines if there is a valid set within the players hand
