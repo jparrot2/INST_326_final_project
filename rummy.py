@@ -9,6 +9,7 @@ suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
 class Card: 
     '''
     Represents a card with a rank and suit
+    
     Attributes: 
         rank (str): rank of the card (2, 3, 4, ... 10, Jack, ... Ace)
         suit (str): suit of the card (hearts, diamonds, spades, clubs)
@@ -27,7 +28,7 @@ class Card:
             creates an object that can be modified within the program 
         
         Author: Anna Carpenter
-            '''
+        '''
         self.rank = rank
         self.suit = suit
     
@@ -42,7 +43,7 @@ class Card:
             Magic method. Creates a string representation of the card.
         
         Author: Anna Carpenter
-            '''
+        '''
         return f"{self.rank} of {self.suit}"
     
     def __eq__(self, other):
@@ -53,7 +54,7 @@ class Card:
             (bool) True if the cards match exactly, False otherwise
             
         Author: Anna Carpenter
-            '''
+        '''
         if isinstance (other, Card):
             return self.rank == other.rank and self.suit == other.suit
         return False 
@@ -131,7 +132,8 @@ class Player:
         Initializes a new player with an empty hand of cards.
         
         Side effects: 
-            Sets the hand attribute equal to an empty list.
+            Sets the hand attribute equal to an empty list and sets 
+            the name attribute equal to the name parameter.
         
         Author: Alex Britton
         """
@@ -175,6 +177,9 @@ class Player:
         
         Side effects:
             Sorts players hand by the rank and suit.
+            
+        Techniques:
+            Lambda expression: used sort with lambda expression as a key.
         
         Author: Alex Britton
         """
@@ -346,6 +351,9 @@ class RummyGame:
             Prints the players cards in their hand and 
             the card on top of the discard pile.
         
+        Techniques:
+            F-strings: used an f-string to print the gamestate.
+    
         Author: Alex Britton
         """
         print(f"Your hand: {[str(card) for card in player.hand]}")
