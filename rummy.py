@@ -209,33 +209,33 @@ class Player:
         Author: Samvitti Nag
 
         """
-    if len(cards) < 3:
-        return False
-
-    first_suit = cards[0].suit
-    for card in cards:
-        if card.suit != first_suit:
+        if len(cards) < 3:
             return False
 
-    sorted_cards = sorted(cards, key=lambda x: ranks.index(x.rank))
-    sub_run = []  
-    consecutive = False  
+        first_suit = cards[0].suit
+        for card in cards:
+            if card.suit != first_suit:
+                return False
 
-    for i in range(len(sorted_cards) - 2):
-        sub_run.append(sorted_cards[i])  
-        
-        if len(sub_run) >= 3:
-            consecutive = True  
-            
-            for c in range(len(sub_run) - 1):
-                if ranks.index(sub_run[c + 1].rank) != ranks.index(sub_run[c].rank) + 1:
-                    consecutive = False
-                    break  
-            
-            if consecutive: 
-                return True
+        sorted_cards = sorted(cards, key=lambda x: ranks.index(x.rank))
+        sub_run = []  
+        consecutive = False  
 
-    return False
+        for i in range(len(sorted_cards) - 2):
+            sub_run.append(sorted_cards[i])  
+            
+            if len(sub_run) >= 3:
+                consecutive = True  
+                
+                for c in range(len(sub_run) - 1):
+                    if ranks.index(sub_run[c + 1].rank) != ranks.index(sub_run[c].rank) + 1:
+                        consecutive = False
+                        break  
+                
+                if consecutive: 
+                    return True
+
+        return False
 
 
 
