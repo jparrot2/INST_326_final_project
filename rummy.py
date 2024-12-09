@@ -211,15 +211,31 @@ class Player:
         """
         if len(cards) < 3:
             return False
+        
         first_suit = cards[0].suit
         for card in cards:
             if card.suit != first_suit:
                 return False
-        cards.sort(key=lambda x: ranks.index(x.rank)) 
-        for i in range(len(cards) - 1):
-            if ranks.index(cards[i + 1].rank) != ranks.index(cards[i].rank) + 1:
-                return False 
-        return True
+            
+        sorted_cards = sorted(cards, key = lambda x: ranks.index(x.rank)) 
+        sub_run = []
+        consecutive = False
+
+        for i in range(len(sorted_cards) - 2):
+            if len(sub_run) >= 3:
+                consecutive = True 
+
+            for c in range(len(sub_run) - 1):
+                if ranks.index(sub_run[c +1].rank) + 1:
+                    consecutive = False 
+                    break 
+
+        if consecutive: 
+            return True 
+            
+    return False
+
+
     
     def is_set(self, cards, allow_jokers= False):
         '''
